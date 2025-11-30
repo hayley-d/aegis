@@ -1,0 +1,19 @@
+networks:
+  postgre:
+    name: aegis
+
+services:
+  
+  database:
+    image: postgres:16.3
+    environment:
+      POSTGRES_DB: aegis 
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Password1
+      ACCEPT_EULA: "Y"
+    container_name: DATABASE_AEGIS
+    restart: unless-stopped
+    networks:
+      - postgre
+    ports:
+      - "5432:5432"

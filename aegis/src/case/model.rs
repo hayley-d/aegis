@@ -1,5 +1,7 @@
 use chrono::prelude::*;
 use uuid::Uuid;
+mod system;
+use system::connection::connect;
 
 pub enum PhaseKind {
     Collection,
@@ -9,33 +11,41 @@ pub enum PhaseKind {
 }
 
 pub struct Case {
-    id: UUID,
+    id: Uuid,
     name: String,
-    created_at: DateTime,
-    created_by: UUID,
-    updated_at: DateTime,
+    created_at: DateTime<Utc>,
+    created_by: Uuid,
+    updated_at: DateTime<Utc>,
     category: String,
     description: String,
     phase: PhaseKind,
 }
 
-impl case {
-    fn new(
+impl Case {
+    pub fn new(
         name: &str,
-        created_by: UUID,
+        created_by: Uuid,
         category: &str,
         description: &str,
         phase: PhaseKind,
     ) -> Self {
         Case {
             id: Uuid::new_v4(),
-            name: name.clone(),
+            name: name.to_string(),
             created_at: Utc::now(),
-            created_by: created_by.clone(),
+            created_by: created_by.to_string(),
             updated_at: Utc::now(),
-            category: category.clone(),
-            description: description.clone(),
+            category: category.to_string(),
+            description: description.to_string(),
             phase,
         }
+    }
+
+    pub fn edit(
+        id: Uuid,
+        name: Option<String>,
+        category: Option<PhaseKind>,
+        description: Option<String>,
+    ) -> Self {
     }
 }
