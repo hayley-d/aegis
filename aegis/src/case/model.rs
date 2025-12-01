@@ -3,11 +3,33 @@ use uuid::Uuid;
 mod system;
 use system::connection::connect;
 
+#[derive(Debug, Clone)]
 pub enum PhaseKind {
     Collection,
     Analysis,
     Reporting,
     Closure,
+}
+
+impl PhaseKind {
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            PhaseKind::Collection => "collection",
+            PhaseKind::Analysis => "analysis",
+            PhaseKind::Reporting => "reporting",
+            PhaseKind::Closure => "closure",
+        }
+    }
+
+    pub fn from_str(string_form: &str) -> Self {
+        match string_from {
+            "collection" => Self::Collection,
+            "analysis" => Self::Analysis,
+            "reporting" => Self::Reporting,
+            "closure" => Self::Colsure,
+            _ => panic!("Invalid phase kind"),
+        }
+    }
 }
 
 pub struct Case {
